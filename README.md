@@ -8,7 +8,6 @@ respectively.
 ```html
 <nickel-cell-grid nx="5" ny="7"></nickel-cell-grid>
 ```
-<!--
 ```
 <custom-element-demo>
   <template>
@@ -17,4 +16,3 @@ respectively.
   </template>
 </custom-element-demo>
 ```
--->
