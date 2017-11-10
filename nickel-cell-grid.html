@@ -3,92 +3,92 @@
 <link rel="import" href="../nickel-color-cell/nickel-color-cell.html" />
 
 <dom-module id="nickel-cell-grid">
-	<template>
-		<style>
-			:host {
-				display: block;
-			}
-			
-			.line {
-				margin: 0;
-				padding: 0;
-			}
-			
-			.cell {
-				margin: 0;
-				padding: 0;
-				display: inline-block;
-			}
-		</style>
-		<div class="container">
-			<template is="dom-repeat" items="[[grid]]">
-				<div class="line">
-					<template is="dom-repeat" items="[[item.line]]">
-						<div class="cell"><nickel-color-cell num="[[item.num]]" show-num></nickel-color-cell></div>
-					</template>
-				</div>
-			</template>
-		</div>
-	</template>
-	
-	<script>
-		'use strict';
-		/**
-		 * `nickel-cell-grid`
-		 * A basic grid of color cells.
-		 *
-		 * @customElement
-		 * @polymer
-		 * @demo demo/index.html
-		 */
-		class NickelCellGrid extends Polymer.Element {
-			
-			static get is() { return 'nickel-cell-grid'; }
-			
-			static get properties() {
-				return {
-					/** Number of cells on the horizontal axis. */
-					nx: {
-						type: Number,
-						value: 3
-					},
-					
-					/** Number of cells on the vertical axis. */
-					ny: {
-						type: Number,
-						value: 3
-					},
-					
-					/** The grid array. */
-					grid: {
-						type: Array,
-						computed: '_getGridArray(nx, ny)'
-					}
-				};
-			}
-			
-			/**
-			 * 
-			 * @param {Number} nx 
-			 * @param {Number} ny 
-			 * @return 
-			 * @private
-			 */
-			_getGridArray(nx, ny) {
-				let gridArray = [];
-				let lineArray;
-				let n = 0;
-				for (var i=0 ; i<ny ; i++) {
-					lineArray = [];
-					for (var j=0 ; j<nx ; j++) {
-						lineArray.push({ "num": n });
-						n++;
-					}
-					gridArray.push({ "line": lineArray });
-				}
-				return gridArray;
-			}
-		}
-		window.customElements.define(NickelCellGrid.is, NickelCellGrid);
-	</script>
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .line {
+        margin: 0;
+        padding: 0;
+      }
+
+      .cell {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+      }
+    </style>
+    <div class="container">
+      <template is="dom-repeat" items="[[grid]]">
+        <div class="line">
+          <template is="dom-repeat" items="[[item.line]]">
+            <div class="cell"><nickel-color-cell num="[[item.num]]" show-num></nickel-color-cell></div>
+          </template>
+        </div>
+      </template>
+    </div>
+  </template>
+
+  <script>
+    'use strict';
+    /**
+     * `nickel-cell-grid`
+     * A basic grid of color cells.
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class NickelCellGrid extends Polymer.Element {
+
+      static get is() { return 'nickel-cell-grid'; }
+
+      static get properties() {
+        return {
+          /** Number of cells on the horizontal axis. */
+          nx: {
+            type: Number,
+            value: 3
+          },
+
+          /** Number of cells on the vertical axis. */
+          ny: {
+            type: Number,
+            value: 3
+          },
+
+          /** The grid array. */
+          grid: {
+            type: Array,
+            computed: '_getGridArray(nx, ny)'
+          }
+        };
+      }
+
+      /**
+       *
+       * @param {Number} nx
+       * @param {Number} ny
+       * @return
+       * @private
+       */
+      _getGridArray(nx, ny) {
+        let gridArray = [];
+        let lineArray;
+        let n = 0;
+        for (var i=0 ; i<ny ; i++) {
+          lineArray = [];
+          for (var j=0 ; j<nx ; j++) {
+            lineArray.push({ "num": n });
+            n++;
+          }
+          gridArray.push({ "line": lineArray });
+        }
+        return gridArray;
+      }
+    }
+    window.customElements.define(NickelCellGrid.is, NickelCellGrid);
+  </script>
 </dom-module>
