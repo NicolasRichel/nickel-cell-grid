@@ -1,21 +1,20 @@
 # \<nickel-cell-grid\>
 
-A basic grid of color cells.
+A basic grid of color cells ([<nickel-color-cell>](https://github.com/NicolasRichel/nickel-color-cell)).
+By default it displays a square grid of 3 lines and 3 columns.
+The `nx` and  `ny` properties can be set to choose the number of columns and lines
+respectively.
 
-## Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element
-
+```html
+<nickel-cell-grid nx="5" ny="7"></nickel-cell-grid>
 ```
-$ polymer serve
+<!--
 ```
-
-## Running Tests
-
+<custom-element-demo>
+  <template>
+    <link rel="import" href="nickel-cell-grid.html"/>
+    <nickel-cell-grid nx="5" ny="7"></nickel-cell-grid>
+  </template>
+</custom-element-demo>
 ```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+-->
