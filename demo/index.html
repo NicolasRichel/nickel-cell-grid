@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+		
+		<title>nickel-cell-grid demo</title>
+		
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		
+		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+		<link rel="import" href="../nickel-cell-grid.html">
+		
+		<custom-style>
+			<style is="custom-style" include="demo-pages-shared-styles">
+		</style>
+		</custom-style>
+	</head>
+	<body>
+		<div class="vertical-section-container centered">
+			
+			<!-- Demo 1 -->
+			<h3>Basic nickel-cell-grid demo</h3>
+			<demo-snippet>
+				<template>
+					<nickel-cell-grid></nickel-cell-grid>
+				</template>
+			</demo-snippet>
+			
+			<!-- Demo 2 -->
+			<h3>nickel-cell-grid dimensions demo</h3>
+			<demo-snippet>
+				<template>
+					<nickel-cell-grid nx="5" ny="2"></nickel-cell-grid>
+				</template>
+			</demo-snippet>
+			
+		</div>
+	</body>
+</html>
