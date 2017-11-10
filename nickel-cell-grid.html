@@ -9,15 +9,15 @@
         display: block;
       }
 
-      .line {
-        margin: 0;
-        padding: 0;
-      }
-
       .cell {
         margin: 0;
         padding: 0;
         display: inline-block;
+      }
+
+      .line {
+        margin: 0;
+        padding: 0;
       }
     </style>
     <div class="container">
@@ -60,7 +60,7 @@
           },
 
           /** The grid array. */
-          grid: {
+          _grid: {
             type: Array,
             computed: '_getGridArray(nx, ny)'
           }
@@ -71,16 +71,15 @@
        *
        * @param {Number} nx
        * @param {Number} ny
-       * @return
-       * @private
+       * @return {Array<Array<Object>>} the array that represent the grid
        */
       _getGridArray(nx, ny) {
         let gridArray = [];
         let lineArray;
         let n = 0;
-        for (var i=0 ; i<ny ; i++) {
+        for (let i=0 ; i<ny ; i++) {
           lineArray = [];
-          for (var j=0 ; j<nx ; j++) {
+          for (let j=0 ; j<nx ; j++) {
             lineArray.push({ "num": n });
             n++;
           }
