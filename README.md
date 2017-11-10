@@ -8,11 +8,9 @@ respectively.
 ```html
 <nickel-cell-grid nx="5" ny="7"></nickel-cell-grid>
 ```
-```
 <custom-element-demo>
   <template>
     <link rel="import" href="nickel-cell-grid.html"/>
     <nickel-cell-grid nx="5" ny="7"></nickel-cell-grid>
   </template>
 </custom-element-demo>
-```
