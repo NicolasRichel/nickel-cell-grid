@@ -8,7 +8,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "nickel-color-cell": "NicolasRichel/NickelElements/nickel-color-cell#^0.0.1"
+    "nickel-color-cell": "nickel-color-cell"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
