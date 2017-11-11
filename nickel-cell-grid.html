@@ -4,24 +4,26 @@
 
 <dom-module id="nickel-cell-grid">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
+    <custom-style>
+      <style is="custom-style">
+        :host {
+          display: block;
+        }
 
-      .cell {
-        margin: 0;
-        padding: 0;
-        display: inline-block;
-      }
+        .cell {
+          margin: 0;
+          padding: 0;
+          display: inline-block;
+        }
 
-      .line {
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+        .line {
+          margin: 0;
+          padding: 0;
+        }
+      </style>
+    </custom-style>
     <div class="container">
-      <template is="dom-repeat" items="[[grid]]">
+      <template is="dom-repeat" items="[[_grid]]">
         <div class="line">
           <template is="dom-repeat" items="[[item.line]]">
             <div class="cell"><nickel-color-cell num="[[item.num]]" show-num></nickel-color-cell></div>
@@ -68,9 +70,9 @@
       }
 
       /**
-			 * Creates and return a "Matrix" (an array of array) with `nx` columns and
-			 * `ny` lines. Each element of this matrix is an object with a `num` field.
-			 * The returned array is a representation of the grid.
+       * Creates and return a "Matrix" (an array of array) with `nx` columns and
+       * `ny` lines. Each element of this matrix is an object with a `num` field.
+       * The returned array is a representation of the grid.
        *
        * @param {Number} nx
        * @param {Number} ny
