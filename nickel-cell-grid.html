@@ -33,7 +33,8 @@
             <div class="cell">
               <nickel-color-cell
                 num="[[item.num]]"
-                show-num="[[showNum]]">
+                show-num="[[showNum]]"
+                level="[[item.level]]">
               </nickel-color-cell>
             </div>
           </template>
@@ -70,6 +71,11 @@
 
       static get properties() {
         return {
+          colorSettings: {
+            type: Object,
+            observer: 'setCellsColorSettings'
+          },
+
           /** Number of cells on the horizontal axis. */
           nx: {
             type: Number,
@@ -96,13 +102,35 @@
         };
       }
 
+      constructor() {
+        super();
+        this.addEventListener('dom-change', () => {
+          this.setCellsColorSettings(this.colorSettings);
+        });
+      }
+
+      /**
+       * Sets the colors settings for the `<nickel-color-cell>` elements.
+       * The `settings` object must correspond to a valid set of properties for
+       * the `<nickel-color-cell>` element.
+       * This method is typically used to set the `minColor`, `maxColor` and
+       * `nbColors` properties.
+       *
+       * @param {Object} settings colors settings to apply
+       */
+      setCellsColorSettings(settings) {
+        this.shadowRoot.querySelectorAll('nickel-color-cell').forEach((cell) => {
+          cell.setProperties(settings);
+        });
+      }
+
       /**
        * Creates and return a "Matrix" (an array of array) with `nx` columns and
        * `ny` lines. Each element of this matrix is an object with a `num` field.
        * The returned array is a representation of the grid.
        *
-       * @param {Number} nx
-       * @param {Number} ny
+       * @param {Number} nx the number of columns
+       * @param {Number} ny the number of lines
        * @return {Array<Array<Object>>} the array that represent the grid
        */
       _getGridArray(nx, ny) {
@@ -110,7 +138,7 @@
         for (let i=0 ; i<ny ; i++) {
           lineArray = [];
           for (let j=0 ; j<nx ; j++) {
-            lineArray.push({ "num": n });
+            lineArray.push({ "num": n, "level": 0 });
             n++;
           }
           gridArray.push({ "line": lineArray });
