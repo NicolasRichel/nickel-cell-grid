@@ -10,6 +10,10 @@
           display: block;
         }
 
+        nickel-color-cell {
+          @apply --nickel-color-cell-mixin;
+        }
+
         .cell {
           margin: 0;
           padding: 0;
@@ -26,7 +30,12 @@
       <template is="dom-repeat" items="[[_grid]]">
         <div class="line">
           <template is="dom-repeat" items="[[item.line]]">
-            <div class="cell"><nickel-color-cell num="[[item.num]]" show-num></nickel-color-cell></div>
+            <div class="cell">
+              <nickel-color-cell
+                num="[[item.num]]"
+                show-num="[[showNum]]">
+              </nickel-color-cell>
+            </div>
           </template>
         </div>
       </template>
@@ -35,8 +44,21 @@
   <script>
     'use strict';
     /**
-     * `nickel-cell-grid`
-     * A basic grid of color cells.
+     * # Nickel Cell Grid
+     * A basic grid of color cells (`<nickel-color-cell>`).
+     *
+     * Example:
+     * ```html
+     * <nickel-cell-grid nx="4" ny="4" showNum></nickel-cell-grid>
+     * ```
+     *
+     * ### Styling
+     * `<nickel-cell-grid>` provides the following custom properties and
+     * mixins for styling :
+     *
+     *  Cutom Property             | Description                            | Default
+     * ----------------------------|----------------------------------------|---------
+     * `--nickel-color-cell-mixin` | mixin applied to `<nickel-color-cell>` | `{}`
      *
      * @customElement
      * @polymer
@@ -60,6 +82,12 @@
             value: 3
           },
 
+          /** Indicates wether to show the cells number or not. */
+          showNum: {
+            type: Boolean,
+            value: false
+          },
+
           /** The grid array. */
           _grid: {
             type: Array,
@@ -78,9 +106,7 @@
        * @return {Array<Array<Object>>} the array that represent the grid
        */
       _getGridArray(nx, ny) {
-        let gridArray = [];
-        let lineArray;
-        let n = 0;
+        let gridArray = [], lineArray, n = 0;
         for (let i=0 ; i<ny ; i++) {
           lineArray = [];
           for (let j=0 ; j<nx ; j++) {
