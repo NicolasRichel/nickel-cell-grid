@@ -18,16 +18,18 @@
           margin: 0;
           padding: 0;
           display: inline-block;
+          @apply --cells-mixin;
         }
 
         .line {
           margin: 0;
           padding: 0;
+          @apply --lines-mixin;
         }
       </style>
     </custom-style>
     <div class="container">
-      <template is="dom-repeat" items="[[grid]]">
+      <template is="dom-repeat" items="[[_grid]]">
         <div class="line">
           <template is="dom-repeat" items="[[item.line]]">
             <div class="cell">
@@ -60,12 +62,13 @@
      *  Cutom Property             | Description                            | Default
      * ----------------------------|----------------------------------------|---------
      * `--nickel-color-cell-mixin` | mixin applied to `<nickel-color-cell>` | `{}`
+     * `--cells-mixin`             | mixin applied to the cells containers  | `{}`
+     * `--lines-mixin`             | mixin applied to the lines containers  | `{}`
      *
      * @customElement
      * @polymer
      * @demo demo/index.html
      */
-    let count=1;
     class NickelCellGrid extends Polymer.Element {
 
       static get is() { return 'nickel-cell-grid'; }
@@ -75,12 +78,6 @@
           colorSettings: {
             type: Object,
             observer: 'setCellsColorSettings'
-          },
-
-          /** The grid matrix. */
-          grid: {
-            type: Array,
-            computed: '_getGridArray(nx, ny)'
           },
 
           /** Number of cells on the horizontal axis. */
@@ -99,15 +96,28 @@
           showNum: {
             type: Boolean,
             value: false
+          },
+
+          /**
+           * Counts the number of `dom-change` event that are
+           * fired from the local DOM.
+           */
+          _domChangeCount: Number,
+
+          /** The grid matrix. */
+          _grid: {
+            type: Array,
+            computed: '_getGridArray(nx, ny)'
           }
         };
       }
 
       constructor() {
         super();
-        document.addEventListener('dom-change', () => {
-          this.setCellsColorSettings(this.colorSettings);
-          console.log(count++);
+        this.addEventListener('dom-change', () => {
+          if (this._domChangeCount++ === this.ny) {
+            this.setCellsColorSettings(this.colorSettings);
+          }
         });
       }
 
@@ -152,6 +162,7 @@
        * @return {Array<Array<Object>>} the array that represent the grid
        */
       _getGridArray(nx, ny) {
+        this._domChangeCount = 0;
         if (nx<=0) {
           this.set('nx', 1);
         } else if (ny<=0) {
