@@ -2,7 +2,7 @@
 <link rel="import" href="../polymer/lib/elements/dom-repeat.html" />
 <link rel="import" href="../nickel-color-cell/nickel-color-cell.html" />
 
-<dom-module id="nickel-cell-grid">
+<dom-module id="nickel-color-cell-grid">
   <template>
     <custom-style>
       <style is="custom-style">
@@ -18,11 +18,13 @@
           margin: 0;
           padding: 0;
           display: inline-block;
+          @apply --cells-mixin;
         }
 
         .line {
           margin: 0;
           padding: 0;
+          @apply --lines-mixin;
         }
       </style>
     </custom-style>
@@ -50,24 +52,26 @@
      *
      * Example:
      * ```html
-     * <nickel-cell-grid nx="4" ny="4" showNum></nickel-cell-grid>
+     * <nickel-color-cell-grid nx="4" ny="4" showNum></nickel-color-cell-grid>
      * ```
      *
      * ### Styling
-     * `<nickel-cell-grid>` provides the following custom properties and
+     * `<nickel-color-cell-grid>` provides the following custom properties and
      * mixins for styling :
      *
      *  Cutom Property             | Description                            | Default
      * ----------------------------|----------------------------------------|---------
      * `--nickel-color-cell-mixin` | mixin applied to `<nickel-color-cell>` | `{}`
+     * `--cells-mixin`             | mixin applied to the cells containers  | `{}`
+     * `--lines-mixin`             | mixin applied to the lines containers  | `{}`
      *
      * @customElement
      * @polymer
      * @demo demo/index.html
      */
-    class NickelCellGrid extends Polymer.Element {
+    class NickelColorCellGrid extends Polymer.Element {
 
-      static get is() { return 'nickel-cell-grid'; }
+      static get is() { return 'nickel-color-cell-grid'; }
 
       static get properties() {
         return {
@@ -94,7 +98,13 @@
             value: false
           },
 
-          /** The grid array. */
+          /**
+           * Counts the number of `dom-change` event that are
+           * fired from the local DOM.
+           */
+          _domChangeCount: Number,
+
+          /** The grid matrix. */
           _grid: {
             type: Array,
             computed: '_getGridArray(nx, ny)'
@@ -105,7 +115,9 @@
       constructor() {
         super();
         this.addEventListener('dom-change', () => {
-          this.setCellsColorSettings(this.colorSettings);
+          if (this._domChangeCount++ === this.ny) {
+            this.setCellsColorSettings(this.colorSettings);
+          }
         });
       }
 
@@ -125,27 +137,49 @@
       }
 
       /**
+       * Sets the level of each color cell in the grid according to the values
+       * in `levelMatrix`.
+       *
+       * @param {Array<Array<Number>>} levelMatrix the matrix of level values
+       */
+      setCellsLevels(levelMatrix) {
+        this.shadowRoot.querySelectorAll('nickel-color-cell').forEach((cell) => {
+          const n = cell.get('num');
+          const j = n%this.nx, i = (n-j)/this.nx;
+          cell.set('level', levelMatrix[i][j]);
+        });
+      }
+
+      /**
        * Creates and return a "Matrix" (an array of array) with `nx` columns and
        * `ny` lines. Each element of this matrix is an object with a `num` field.
        * The returned array is a representation of the grid.
+       * **Note :** if `nx` and/or `ny` is less than or equal to 0 then the
+       * corresponding dimension(s) will be set to 1.
        *
        * @param {Number} nx the number of columns
        * @param {Number} ny the number of lines
        * @return {Array<Array<Object>>} the array that represent the grid
        */
       _getGridArray(nx, ny) {
-        let gridArray = [], lineArray, n = 0;
-        for (let i=0 ; i<ny ; i++) {
-          lineArray = [];
-          for (let j=0 ; j<nx ; j++) {
-            lineArray.push({ "num": n, "level": 0 });
-            n++;
+        this._domChangeCount = 0;
+        if (nx<=0) {
+          this.set('nx', 1);
+        } else if (ny<=0) {
+          this.set('ny', 1);
+        } else {
+          let gridArray = [], lineArray, n = 0;
+          for (let i=0 ; i<ny ; i++) {
+            lineArray = [];
+            for (let j=0 ; j<nx ; j++) {
+              lineArray.push({ "num": n++, "level": 0 });
+            }
+            gridArray.push({ "line": lineArray });
           }
-          gridArray.push({ "line": lineArray });
+          return gridArray;
         }
-        return gridArray;
       }
     }
-    window.customElements.define(NickelCellGrid.is, NickelCellGrid);
+    window.customElements.define(NickelColorCellGrid.is, NickelColorCellGrid);
   </script>
 </dom-module>
