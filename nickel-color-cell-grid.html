@@ -2,7 +2,7 @@
 <link rel="import" href="../polymer/lib/elements/dom-repeat.html" />
 <link rel="import" href="../nickel-color-cell/nickel-color-cell.html" />
 
-<dom-module id="nickel-cell-grid">
+<dom-module id="nickel-color-cell-grid">
   <template>
     <custom-style>
       <style is="custom-style">
@@ -52,11 +52,11 @@
      *
      * Example:
      * ```html
-     * <nickel-cell-grid nx="4" ny="4" showNum></nickel-cell-grid>
+     * <nickel-color-cell-grid nx="4" ny="4" showNum></nickel-color-cell-grid>
      * ```
      *
      * ### Styling
-     * `<nickel-cell-grid>` provides the following custom properties and
+     * `<nickel-color-cell-grid>` provides the following custom properties and
      * mixins for styling :
      *
      *  Cutom Property             | Description                            | Default
@@ -69,9 +69,9 @@
      * @polymer
      * @demo demo/index.html
      */
-    class NickelCellGrid extends Polymer.Element {
+    class NickelColorCellGrid extends Polymer.Element {
 
-      static get is() { return 'nickel-cell-grid'; }
+      static get is() { return 'nickel-color-cell-grid'; }
 
       static get properties() {
         return {
@@ -180,6 +180,6 @@
         }
       }
     }
-    window.customElements.define(NickelCellGrid.is, NickelCellGrid);
+    window.customElements.define(NickelColorCellGrid.is, NickelColorCellGrid);
   </script>
 </dom-module>

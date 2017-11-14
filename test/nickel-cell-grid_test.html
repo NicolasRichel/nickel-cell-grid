@@ -4,29 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>nickel-cell-grid test</title>
+    <title>nickel-color-cell-grid test</title>
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../nickel-cell-grid.html">
+    <link rel="import" href="../nickel-color-cell-grid.html">
   </head>
   <body>
 
     <test-fixture id="BasicTestFixture">
       <template>
-        <nickel-cell-grid></nickel-cell-grid>
+        <nickel-color-cell-grid></nickel-color-cell-grid>
       </template>
     </test-fixture>
 
     <test-fixture id="ChangedPropertyTestFixture">
       <template>
-        <nickel-cell-grid prop1="new-prop1"></nickel-cell-grid>
+        <nickel-color-cell-grid prop1="new-prop1"></nickel-color-cell-grid>
       </template>
     </test-fixture>
 
     <script>
-      suite('nickel-cell-grid', function() {
+      suite('nickel-color-cell-grid', function() {
 
         test('instantiating the element with default properties works', function() {
           var element = fixture('BasicTestFixture');

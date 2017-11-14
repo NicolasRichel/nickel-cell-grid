@@ -1,7 +1,7 @@
 {
-  "name": "nickel-cell-grid",
+  "name": "nickel-color-cell-grid",
   "description": "A basic grid of color cells.",
-  "main": "nickel-cell-grid.html",
+  "main": "nickel-color-cell-grid.html",
   "license": "GPL-3.0",
   "authors": [
   	"Nicolas Richel"

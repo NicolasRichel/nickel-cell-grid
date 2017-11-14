@@ -1,6 +1,6 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/NicolasRichel/nickel-cell-grid)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/NicolasRichel/nickel-color-cell-grid)
 
-# \<nickel-cell-grid\>
+# \<nickel-color-cell-grid\>
 (Built with Polymer 2.0)
 
 A basic grid of color cells ([\<nickel-color-cell\>](https://github.com/NicolasRichel/nickel-color-cell)).
@@ -13,14 +13,14 @@ respectively.
 <custom-element-demo>
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="nickel-cell-grid.html"/>
+    <link rel="import" href="nickel-color-cell-grid.html"/>
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
 ```
 -->
 ```html
-<nickel-cell-grid nx="5" ny="7"></nickel-cell-grid>
+<nickel-color-cell-grid nx="5" ny="7"></nickel-color-cell-grid>
 ```
 
 ## Contributing
