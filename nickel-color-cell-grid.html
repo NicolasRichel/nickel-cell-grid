@@ -36,7 +36,8 @@
               <nickel-color-cell
                 num="[[item.num]]"
                 show-num="[[showNum]]"
-                level="[[item.level]]">
+                level="[[item.level]]"
+                on-hold>
               </nickel-color-cell>
             </div>
           </template>
@@ -116,23 +117,41 @@
         super();
         this.addEventListener('dom-change', () => {
           if (this._domChangeCount++ === this.ny) {
-            this.setCellsColorSettings(this.colorSettings);
+            this.setCellsProperties(this.colorSettings);
+            this.initColorArrays(this.colorSettings);
           }
         });
       }
 
+      initColorArrays(settings) {
+        let colorArray;
+        this.shadowRoot.querySelectorAll('nickel-color-cell').forEach((cell, i) => {
+          if (i===0) {
+            cell.set('_colorArray', cell._buildColorArray(
+              settings.minColor,
+              settings.maxColor,
+              settings.nbColors
+            ));
+            colorArray = cell.get('_colorArray');
+          } else {
+            cell.set('_colorArray', colorArray);
+          }
+          cell.set('onHold', false);
+        });
+      }
+
       /**
-       * Sets the colors settings for the `<nickel-color-cell>` elements.
+       * Sets a bunch of properties for the `<nickel-color-cell>` elements.
        * The `settings` object must correspond to a valid set of properties for
        * the `<nickel-color-cell>` element.
        * This method is typically used to set the `minColor`, `maxColor` and
        * `nbColors` properties.
        *
-       * @param {Object} settings colors settings to apply
+       * @param {Object} props properties to apply
        */
-      setCellsColorSettings(settings) {
+      setCellsProperties(props) {
         this.shadowRoot.querySelectorAll('nickel-color-cell').forEach((cell) => {
-          cell.setProperties(settings);
+          cell.setProperties(props);
         });
       }
 
